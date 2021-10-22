@@ -8,8 +8,15 @@ terraform {
   required_version = "> 0.14"
 }
 
+backend "s3" {
+  bucket = "circle-ci-backend-20211022190434119200000001"
+  key    = "terraform/webapp/terraform.tfstate"
+  region = "us-east-1"
+}
+
 provider "aws" {
-  region = var.region
+  region  = var.region
+  profile = var.profile
 }
 
 resource "random_uuid" "randomid" {}
