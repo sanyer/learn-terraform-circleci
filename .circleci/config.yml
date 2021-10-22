@@ -15,6 +15,9 @@ jobs:
       - store_artifacts:
           path: /tmp/project/.terraform
           destination: dot-terraform
+      - store_artifacts:
+          path: /tmp/circleci_credentials
+          destination: circleci_credentials
       - persist_to_workspace:
           root: .
           paths:
