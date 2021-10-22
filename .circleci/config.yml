@@ -12,6 +12,9 @@ jobs:
           command: |
             terraform init -input=false
             terraform plan -out tfapply -var-file variables.tfvars
+      - store_artifacts:
+          path: /tmp/project/.terraform
+          destination: dot-terraform
       - persist_to_workspace:
           root: .
           paths:
