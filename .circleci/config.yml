@@ -41,28 +41,28 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run:
-          name: terraform
-          command: |
-            terraform apply -auto-approve tfapply
       - restore_cache:
           keys:
             - terraform-{{ checksum ".terraform.lock.hcl" }}
             - terraform-
+      - run:
+          name: terraform
+          command: |
+            terraform apply -auto-approve tfapply
 
   plan-destroy:
     <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
-      - run:
-          name: terraform create destroy plan
-          command: |
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
       - restore_cache:
           keys:
             - terraform-{{ checksum ".terraform.lock.hcl" }}
             - terraform-
+      - run:
+          name: terraform create destroy plan
+          command: |
+            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -73,14 +73,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run:
-          name: terraform destroy
-          command: |
-            terraform apply -auto-approve tfdestroy
       - restore_cache:
           keys:
             - terraform-{{ checksum ".terraform.lock.hcl" }}
             - terraform-
+      - run:
+          name: terraform destroy
+          command: |
+            terraform apply -auto-approve tfdestroy
 
 workflows:
   version: 2
