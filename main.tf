@@ -8,9 +8,10 @@ terraform {
   required_version = "~> 1.0.0"
 
   backend "s3" {
-    bucket = "circle-ci-backend-20211022190434119200000001"
-    key    = "terraform/webapp/terraform.tfstate"
-    region = "us-east-1"
+    bucket  = "circle-ci-backend-20211024011918565400000001"
+    key     = "terraform/webapp/terraform.tfstate"
+    region  = "us-east-1"
+    profile = "rzhuzha"
   }
 }
 
