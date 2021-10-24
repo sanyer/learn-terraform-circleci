@@ -31,10 +31,13 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - "*.tf"
-            - "*.tfvars"
-            - "*.hcl"
-            - "tfapply"
+            - main.tf
+            - variables.tf
+            - variables.tfvars
+            - .terraform.lock.hcl
+            - circleci_s3_access.tpl.json
+            - assets/
+            - tfapply
 
   apply:
     <<: *defaults
@@ -66,7 +69,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - "tfdestroy"
+            - tfdestroy
 
   destroy:
     <<: *defaults
