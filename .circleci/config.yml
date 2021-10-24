@@ -34,6 +34,7 @@ jobs:
             - "*.tf"
             - "*.tfvars"
             - "*.hcl"
+            - "tfapply"
 
   apply:
     <<: *defaults
@@ -65,6 +66,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
+            - "tfdestroy"
 
   destroy:
     <<: *defaults
