@@ -15,8 +15,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - terraform-{{ checksum ".terraform.lock.hcl" }}
-            - terraform-
+            - v1-terraform-{{ checksum ".terraform.lock.hcl" }}
+            - v1-terraform-
       - run:
           name: terraform init & plan
           command: |
@@ -25,7 +25,7 @@ jobs:
       - store_artifacts:
           path: .terraform.lock.hcl
       - save_cache:
-          key: terraform-{{ checksum ".terraform.lock.hcl" }}
+          key: v1-terraform-{{ checksum ".terraform.lock.hcl" }}
           paths:
             - .terraform
       - persist_to_workspace:
@@ -46,8 +46,8 @@ jobs:
           at: ~/repo
       - restore_cache:
           keys:
-            - terraform-{{ checksum ".terraform.lock.hcl" }}
-            - terraform-
+            - v1-terraform-{{ checksum ".terraform.lock.hcl" }}
+            - v1-terraform-
       - run:
           name: terraform
           command: |
@@ -60,8 +60,8 @@ jobs:
           at: ~/repo
       - restore_cache:
           keys:
-            - terraform-{{ checksum ".terraform.lock.hcl" }}
-            - terraform-
+            - v1-terraform-{{ checksum ".terraform.lock.hcl" }}
+            - v1-terraform-
       - run:
           name: terraform create destroy plan
           command: |
@@ -78,8 +78,8 @@ jobs:
           at: ~/repo
       - restore_cache:
           keys:
-            - terraform-{{ checksum ".terraform.lock.hcl" }}
-            - terraform-
+            - v1-terraform-{{ checksum ".terraform.lock.hcl" }}
+            - v1-terraform-
       - run:
           name: terraform destroy
           command: |
