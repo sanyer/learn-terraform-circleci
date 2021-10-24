@@ -12,7 +12,16 @@ jobs:
   plan-apply:
     <<: *defaults
     steps:
+      - restore_cache:
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
+            - v1-source-{{ .Branch }}-
+            - v1-source-
       - checkout
+      - save_cache:
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
       - restore_cache:
           keys:
             - v1-terraform-{{ checksum ".terraform.lock.hcl" }}
