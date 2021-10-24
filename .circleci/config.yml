@@ -22,6 +22,8 @@ jobs:
           command: |
             terraform init -input=false
             terraform plan -out tfapply -var-file variables.tfvars
+      - store_artifacts:
+          path: .terraform.lock.hcl
       - save_cache:
           key: terraform-{{ checksum ".terraform.lock.hcl" }}
           paths:
