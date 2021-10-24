@@ -22,6 +22,10 @@ jobs:
           key: terraform-{{ checksum ".terraform.lock.hcl" }}
           paths:
             - .terraform
+      - restore_cache:
+          keys:
+            - terraform-{{ checksum ".terraform.lock.hcl" }}
+            - terraform-
       - persist_to_workspace:
           root: ~/repo
           paths:
