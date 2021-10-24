@@ -5,7 +5,7 @@ terraform {
       version = "3.44.0"
     }
   }
-  required_version = "> 0.14"
+  required_version = "~> 1.0.0"
 
   backend "s3" {
     bucket = "circle-ci-backend-20211022190434119200000001"
