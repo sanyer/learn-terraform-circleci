@@ -1,10 +1,15 @@
 version: 2
 
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+  environment:
+    TF_IN_AUTOMATION: "true"
+
 jobs:
   plan-apply:
-    working_directory: /tmp/project
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    <<: *defaults
     steps:
       - checkout
       - run:
@@ -23,8 +28,7 @@ jobs:
             - .
 
   apply:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    <<: *defaults
     steps:
       - attach_workspace:
           at: .
@@ -42,8 +46,7 @@ jobs:
             - .
 
   plan-destroy:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    <<: *defaults
     steps:
       - attach_workspace:
           at: .
@@ -61,8 +64,7 @@ jobs:
             - .
 
   destroy:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    <<: *defaults
     steps:
       - attach_workspace:
           at: .
