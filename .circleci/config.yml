@@ -18,10 +18,11 @@ jobs:
       - store_artifacts:
           path: /tmp/circleci_credentials
           destination: circleci_credentials
-      - restore_cache:
-          keys:
-            - terraform-{{ checksum ".terraform.lock.hcl" }}
-            - terraform- # used if checksum fails
+      - save_cache:
+          key: terraform-{{ checksum ".terraform.lock.hcl" }}
+          paths:
+            - /tmp/project/.terraform.lock.hcl
+            - /tmp/project/.terraform
       - persist_to_workspace:
           root: .
           paths:
@@ -37,6 +38,10 @@ jobs:
           name: terraform
           command: |
             terraform apply -auto-approve tfapply
+      - restore_cache:
+          keys:
+            - terraform-{{ checksum ".terraform.lock.hcl" }}
+            - terraform-
       - persist_to_workspace:
           root: .
           paths:
@@ -52,6 +57,10 @@ jobs:
           name: terraform create destroy plan
           command: |
             terraform plan -destroy -out tfdestroy -var-file variables.tfvars
+      - restore_cache:
+          keys:
+            - terraform-{{ checksum ".terraform.lock.hcl" }}
+            - terraform-
       - persist_to_workspace:
           root: .
           paths:
@@ -67,6 +76,10 @@ jobs:
           name: terraform destroy
           command: |
             terraform apply -auto-approve tfdestroy
+      - restore_cache:
+          keys:
+            - terraform-{{ checksum ".terraform.lock.hcl" }}
+            - terraform-
 
 workflows:
   version: 2
