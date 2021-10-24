@@ -18,6 +18,10 @@ jobs:
       - store_artifacts:
           path: /tmp/circleci_credentials
           destination: circleci_credentials
+      - restore_cache:
+          keys:
+            - terraform-{{ checksum .terraform.lock.hcl }}
+            - terraform- # used if checksum fails
       - persist_to_workspace:
           root: .
           paths:
