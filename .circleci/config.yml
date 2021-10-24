@@ -24,8 +24,8 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - *.tf
-            - *.hcl
+            - "*.tf"
+            - "*.hcl"
 
   apply:
     <<: *defaults
@@ -43,8 +43,8 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - *.tf
-            - *.hcl
+            - "*.tf"
+            - "*.hcl"
 
   plan-destroy:
     <<: *defaults
@@ -62,8 +62,8 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - *.tf
-            - *.hcl
+            - "*.tf"
+            - "*.hcl"
 
   destroy:
     <<: *defaults
