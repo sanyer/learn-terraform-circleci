@@ -23,15 +23,16 @@ jobs:
             - /tmp/project/.terraform.lock.hcl
             - /tmp/project/.terraform
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
-            - .
+            - *.tf
+            - *.hcl
 
   apply:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: .
+          at: ~/repo
       - run:
           name: terraform
           command: |
@@ -41,15 +42,16 @@ jobs:
             - terraform-{{ checksum ".terraform.lock.hcl" }}
             - terraform-
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
-            - .
+            - *.tf
+            - *.hcl
 
   plan-destroy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: .
+          at: ~/repo
       - run:
           name: terraform create destroy plan
           command: |
@@ -59,15 +61,16 @@ jobs:
             - terraform-{{ checksum ".terraform.lock.hcl" }}
             - terraform-
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
-            - .
+            - *.tf
+            - *.hcl
 
   destroy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: .
+          at: ~/repo
       - run:
           name: terraform destroy
           command: |
